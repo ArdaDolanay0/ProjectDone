@@ -8,10 +8,13 @@ package mainproject;
 import Dialogues.Dialogue;
 import File.MakeMusicFile;
 import File.MakeTextFile;
+import LinkList.LinkList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,9 +24,13 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -33,6 +40,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -63,10 +71,13 @@ public class StoryScreenController implements Initializable {
     private MakeTextFile newTextFile;
     private int time;
     private Timeline timeline;
-    private boolean running, condition = true;
+    private boolean running, condition = true, conditionListner = true, nextQuestionCondition;
     private Thread thread;
     private int chapter = 0;
-    private int nextQuestion;
+    private int nextQuestion, nextQuestionSeter;
+    private String answer;
+    private String[] commands, commandsText;
+    private LinkList itemsNotInInventory;
 
     /**
      * Initializes the controller class.
@@ -76,18 +87,17 @@ public class StoryScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        itemsNotInInventory = new LinkList();
         running = true;
         thread = new Thread(new game());
         thread.start();
-        Dialogue dialogues = new Dialogue();
         playMusic();
-        
+
         //startGame();
         //startDialuge();
-
     }
 
-    private void scene1(int chapters) {
+    private void scene1(int time) {
         switch (chapter) {
             case 0:
 
@@ -109,6 +119,7 @@ public class StoryScreenController implements Initializable {
                 break;
             case 2:
                 if (condition && timeline.getStatus().equals(STOPPED)) {
+                    time = nextQuestion;
                     squireDialuge(nextQuestion);
                     condition = false;
                     chapter = 3;
@@ -117,10 +128,37 @@ public class StoryScreenController implements Initializable {
                 break;
             case 3:
                 if (!condition) {
+                    //commandsListView.getItems().clear();
+                    time = nextQuestion;
+                    displayUserAnswer(nextQuestion);
+                    condition = true;
+                    chapter = 4;
                     //squireDialuge(nextQuestion);
+                }
+                break;
+            case 4:
+                if (condition) {
+                    if (nextQuestionCondition) {
+                        time = nextQuestion;
+                        //commandsListView.getItems().clear();
+                        squireDialuge(nextQuestion);
+                        condition = false;
+                        nextQuestionCondition = false;
+                         chapter = 5;
+                    }
+                }
+                break;
+            case 5:
+                if(!condition){
+                    //changeDialuge();
+                    //dialuge1();
+                    addItem("Swort Sword",20);
                 }
 
         }
+    }
+    public void addItem(String item, int damage ){
+         itemsNotInInventory.InsertNextLink(item, damage);
     }
 
     public void startDialuge() {
@@ -141,35 +179,38 @@ public class StoryScreenController implements Initializable {
     }
 
     public void squireDialuge(int i) {
-        String[] squireDialuge = {"Hey " + GameScreenController.characterName + " aren't you exited for the war? \n", "", "Yea it's going to be fun"};
+        String[] squireDialuge = {"Hey " + GameScreenController.characterName + " aren't you exited for the war? \n", "\n it's gonna be fun, \n you seem very nice here a sword for your honours.", "Yea it's going to be fun"};
         mainTextArea.appendText(squireDialuge[i]);
-        String[][] avaibleCommands = {{"Sayyes", "Sayno", "ignore"}, {}};
-        String[][] textComments = {{"yes", "no", ""}, {}};
-        avaliableCommandsDialuge(avaibleCommands[i], i, textComments[i]);
+        String[][] avaibleCommands = {{"Say yes", "Say no", "ignore"}, {"Say yes", "Say no", "ignore"}};
+        commands = avaibleCommands[i];
+        String[][] textCommends = {{"yes", "no", ""}, {"yes", "no", ""}};
+        commandsText = textCommends[i];
+        //avaliableCommandsDialuge(avaibleCommands[i], i, textComments[i]);
     }
 
-    public void avaliableCommandsDialuge(String[] commands, int i, String[] textCommands) {
+    public void displayUserAnswer(int i) {
         commandsListView.getItems().addAll(commands);
-        
-       commandsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-    @Override
-    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-        // Your action here
-        
-       newValue = textCommands[commandsListView.getItems().indexOf(newValue)];
-       mainTextArea.appendText(newValue);
-        commandsListView.getItems().removeAll();
-    }
-});
-        
-        ObservableList<String> commands2;
-        commands2 = commandsListView.getSelectionModel().getSelectedItems();
-        
-        /*if(!commands2.get(0).equals(null)){
-        System.out.println(commands2.get(0));
-        }*/
+ 
+        ChangeListener<String> listener = new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
+                if (conditionListner) {
+                    nextQuestion = commandsListView.getItems().indexOf(newValue) + 1;
+                    newValue = commandsText[commandsListView.getItems().indexOf(newValue)];
+                    mainTextArea.appendText(newValue);
+                    conditionListner = false;
+                    nextQuestionCondition = true;
+                }
+
+            }
+        };
+        commandsListView.getSelectionModel().selectedItemProperty().addListener(listener);
+        if(nextQuestionCondition ){
+          commandsListView.getSelectionModel().selectedItemProperty().removeListener(listener);
+        }
     }
+    
 
     public void setTimer(int cycle) {
 
@@ -184,17 +225,17 @@ public class StoryScreenController implements Initializable {
     }
 
     public void startGame() {
-        int chapters = 0;
+        int chapters = 0, time = 0;
         startDialuge();
         while (running) {
-            act1(chapters);
+            act1(time);
         }
         stop();
     }
 
-    public void act1(int chapters) {
+    public void act1(int time) {
 
-        scene1(chapters);
+        scene1(time);
     }
 
     public void stop() {
@@ -236,6 +277,15 @@ public class StoryScreenController implements Initializable {
          }
          mv.setMediaPlayer(newMusic.returnMediaPlayer());
          (newMusic.returnMediaPlayer()).play();*/
+    }
+    
+    public void inventoryButton(ActionEvent event) throws IOException{
+         Parent root;
+         root = FXMLLoader.load(getClass().getClassLoader().getResource("inventoryScreen.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("My New Stage Title");
+            stage.setScene(new Scene(root));
+            stage.show();
     }
 
     class game implements Runnable {
