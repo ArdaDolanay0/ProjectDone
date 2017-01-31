@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainproject.InventoryScreenController">
+   <children>
+      <TableView fx:id="table" layoutX="27.0" layoutY="25.0" prefHeight="355.0" prefWidth="431.0">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="value" prefWidth="75.0" text="Value" />
+        </columns>
+      </TableView>
+      <Button fx:id="equipButton" layoutX="470.0" layoutY="62.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="104.0" text="Equip" />
+      <Button fx:id="sortButton" layoutX="470.0" layoutY="144.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="104.0" text="Sort" />
+   </children>
+</AnchorPane>

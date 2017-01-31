@@ -53,7 +53,7 @@ public class MainScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        String path = new File("C:/Users/USER/Documents/NetBeansProjects/MainProject/src/media/song.mp3").getAbsolutePath();
+        String path = new File("src/media/song.mp3").getAbsolutePath();
         me = new Media(new File(path).toURI().toString());
         mp = new MediaPlayer(me);
         mv.setMediaPlayer(mp);

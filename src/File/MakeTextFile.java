@@ -84,7 +84,7 @@ public class MakeTextFile extends MakeFile implements InputInterface, OutputInte
     }
     
     public void changeFileName(String name){
-        
+        fileName = name;
     }
     
 }

@@ -5,29 +5,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainproject.GameScreenController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainproject.GameScreenController">
    <children>
-      <TextArea fx:id="textBox" layoutX="131.0" layoutY="23.0" prefHeight="105.0" prefWidth="739.0" />
-      <Label layoutX="378.0" layoutY="176.0" prefHeight="22.0" prefWidth="301.0" text="Enter Character Name:" />
+      <ImageView fx:id="mainBackground" fitHeight="700.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="img/backDrop.jpg" />
+         </image>
+     </ImageView>
+      <TextArea fx:id="textBox" layoutX="131.0" layoutY="23.0" prefHeight="127.0" prefWidth="787.0" />
+      <Label layoutX="378.0" layoutY="176.0" prefHeight="22.0" prefWidth="301.0" text="Enter Character Name:" textFill="WHITE" />
       <TextField fx:id="characterNameTextField" layoutX="378.0" layoutY="220.0" onAction="#EnteredCharacterName" prefHeight="22.0" prefWidth="210.0" promptText="Name Here" />
-      <Label layoutX="103.0" layoutY="271.0" prefHeight="31.0" prefWidth="150.0" text="Choose Race:" />
-      <CheckBox fx:id="humanBox" layoutX="101.0" layoutY="302.0" mnemonicParsing="false" onAction="#checkEventChoseRace" onMouseEntered="#humanDescription" prefHeight="17.0" prefWidth="73.0" text="Human" />
-      <CheckBox fx:id="pounderBox" layoutX="101.0" layoutY="333.0" mnemonicParsing="false" onAction="#checkEventChoseRace" onMouseEntered="#pounderDescription" prefHeight="17.0" prefWidth="73.0" text="Pounder" />
-      <Label layoutX="103.0" layoutY="424.0" prefHeight="17.0" prefWidth="73.0" text="Body Type:" />
-      <CheckBox fx:id="muscularBox" layoutX="101.0" layoutY="453.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" prefHeight="17.0" prefWidth="83.0" text="Muscular" />
-      <CheckBox fx:id="fatBox" layoutX="101.0" layoutY="486.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" prefHeight="17.0" prefWidth="53.0" text="Fat" />
-      <CheckBox fx:id="slimBox" layoutX="101.0" layoutY="522.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" text="Slim" />
-      <Label layoutX="395.0" layoutY="278.0" prefHeight="17.0" prefWidth="94.0" text="Choose Gender:" />
-      <CheckBox fx:id="maleBox" layoutX="395.0" layoutY="311.0" mnemonicParsing="false" onAction="#checkEventChooseGender" text="Male" />
-      <CheckBox fx:id="femaleBox" layoutX="395.0" layoutY="342.0" mnemonicParsing="false" onAction="#checkEventChooseGender" text="Female" />
+      <Label layoutX="103.0" layoutY="271.0" prefHeight="31.0" prefWidth="150.0" text="Choose Race:" textFill="WHITE" />
+      <CheckBox fx:id="humanBox" layoutX="101.0" layoutY="304.0" mnemonicParsing="false" onAction="#checkEventChoseRace" onMouseEntered="#humanDescription" prefHeight="17.0" prefWidth="73.0" text="Human" textFill="WHITE" />
+      <CheckBox fx:id="pounderBox" layoutX="101.0" layoutY="334.0" mnemonicParsing="false" onAction="#checkEventChoseRace" onMouseEntered="#pounderDescription" prefHeight="17.0" prefWidth="73.0" text="Pounder" textFill="WHITE" />
+      <Label layoutX="103.0" layoutY="424.0" prefHeight="17.0" prefWidth="73.0" text="Body Type:" textFill="WHITE" />
+      <CheckBox fx:id="muscularBox" layoutX="101.0" layoutY="450.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" prefHeight="17.0" prefWidth="83.0" text="Muscular" textFill="WHITE" />
+      <CheckBox fx:id="fatBox" layoutX="101.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" prefHeight="17.0" prefWidth="53.0" text="Fat" textFill="WHITE" />
+      <CheckBox fx:id="slimBox" layoutX="101.0" layoutY="510.0" mnemonicParsing="false" onAction="#checkEventChooseBodyType" text="Slim" textFill="WHITE" />
+      <Label layoutX="395.0" layoutY="278.0" prefHeight="17.0" prefWidth="94.0" text="Choose Gender:" textFill="WHITE" />
+      <CheckBox fx:id="maleBox" layoutX="395.0" layoutY="304.0" mnemonicParsing="false" onAction="#checkEventChooseGender" text="Male" textFill="WHITE" />
+      <CheckBox fx:id="femaleBox" layoutX="395.0" layoutY="334.0" mnemonicParsing="false" onAction="#checkEventChooseGender" text="Female" textFill="WHITE" />
       <Button fx:id="doneButton" layoutX="707.0" layoutY="596.0" mnemonicParsing="false" onAction="#doneButton" prefHeight="25.0" prefWidth="136.0" text="Done" />
-      <Label fx:id="characterLabel" layoutX="624.0" layoutY="211.0" prefHeight="83.0" prefWidth="301.0" />
-      <Label layoutX="395.0" layoutY="424.0" prefHeight="17.0" prefWidth="136.0" text="Choose Desired Class: " />
-      <CheckBox fx:id="warriorBox" layoutX="395.0" layoutY="453.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#warriorDescription" prefHeight="17.0" prefWidth="94.0" text="Warrior" />
-      <CheckBox fx:id="archerBox" layoutX="395.0" layoutY="486.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#archerDescription" text="Archer" />
-      <CheckBox fx:id="knightBox" layoutX="395.0" layoutY="514.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#knightDescription" prefHeight="17.0" prefWidth="73.0" text="Knight" />
-      <Label fx:id="description" layoutX="545.0" layoutY="296.0" prefHeight="291.0" prefWidth="409.0" />
+      <Label fx:id="characterLabel" layoutX="624.0" layoutY="211.0" prefHeight="83.0" prefWidth="301.0" textFill="WHITE" />
+      <Label layoutX="395.0" layoutY="424.0" prefHeight="17.0" prefWidth="136.0" text="Choose Desired Class: " textFill="WHITE" />
+      <CheckBox fx:id="warriorBox" layoutX="395.0" layoutY="450.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#warriorDescription" prefHeight="17.0" prefWidth="94.0" text="Warrior" textFill="WHITE" />
+      <CheckBox fx:id="archerBox" layoutX="395.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#archerDescription" text="Archer" textFill="WHITE" />
+      <CheckBox fx:id="knightBox" layoutX="395.0" layoutY="510.0" mnemonicParsing="false" onAction="#checkEventChooseClass" onMouseEntered="#knightDescription" prefHeight="17.0" prefWidth="73.0" text="Knight" textFill="WHITE" />
+      <Label fx:id="description" layoutX="545.0" layoutY="296.0" prefHeight="291.0" prefWidth="409.0" textFill="WHITE" />
    </children>
 </AnchorPane>

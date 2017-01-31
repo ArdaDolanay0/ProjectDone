@@ -59,12 +59,14 @@ public class GameScreenController implements Initializable {
     public static String characterName, characterRace, characterGender, characterClass, characterBodyType;
     private MakeTextFile newFile;
     private boolean[] conditions = {false, false, false, false, false};
+   
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        conditions[4]=true;
         Collections.addAll(allDescriptions,
                 "Warrior is a class for greedy indivials: "
                 + "\n It relies on strength and long melee weapons. "
@@ -99,7 +101,7 @@ public class GameScreenController implements Initializable {
         Timeline timeline = new Timeline(new KeyFrame(
                 Duration.millis(2000),
                 ae -> displayGuide()));
-        timeline.setCycleCount(6);
+        timeline.setCycleCount(3);
         timeline.play();
 
     }
@@ -226,7 +228,7 @@ public class GameScreenController implements Initializable {
                 adder++;
             }
         }
-        if (adder == 4) {
+        if (adder == 5) {
             String FxName = "mainGameScreen.fxml";
             Stage stage = (Stage) doneButton.getScene().getWindow();
             MakingGame newGame = new MakingGame();

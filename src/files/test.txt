@@ -1,5 +1,4 @@
-one
-two
-three
-four
-five
+As a user it is your duty to select the various characteristics of the game
+The text area will load certain questions and to answer you must refer to the commands list (options list “Yes”, “No”, “Ignore”)
+After each response to each given question there are several paths in the story that one can make
+
