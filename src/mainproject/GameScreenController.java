@@ -38,12 +38,12 @@ import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * FXML Controller class`
  *
  * @author USER
  */
 public class GameScreenController implements Initializable {
-
+    //varaible declaration
     @FXML
     public Button doneButton;
     @FXML
@@ -58,15 +58,17 @@ public class GameScreenController implements Initializable {
     private ArrayList<String> allDescriptions = new ArrayList();
     public static String characterName, characterRace, characterGender, characterClass, characterBodyType;
     private MakeTextFile newFile;
-    private boolean[] conditions = {false, false, false, false, false};
+    private final boolean[] conditions = {false, false, false, false, false};
    
 
-    /**
+    /**Method
      * Initializes the controller class.
+     * pre:none
+     * post: initializes some of the local instance variable
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        conditions[4]=true;
+       
         Collections.addAll(allDescriptions,
                 "Warrior is a class for greedy indivials: "
                 + "\n It relies on strength and long melee weapons. "
@@ -95,7 +97,11 @@ public class GameScreenController implements Initializable {
         setTimer();
 
     }
-
+    /**Method
+     * creates a Timeline and sets and initializes all the components required to create a cycle to repeat a certain method corresponding to time
+     * pre:none
+     * post:A TimleLine has been created and played until it is over
+     */
     public void setTimer() {
 
         Timeline timeline = new Timeline(new KeyFrame(
@@ -105,7 +111,12 @@ public class GameScreenController implements Initializable {
         timeline.play();
 
     }
-
+    /**Method
+     * displays a line from a certain file
+     * pre:a Timeline must be created
+     * post: displayed a line from a file
+     * 
+     */
     public void displayGuide() {
         try {
             textBox.appendText(newFile.OutPutReadLine() + "\n");
@@ -114,52 +125,83 @@ public class GameScreenController implements Initializable {
             System.err.print("Error Found");
         }
     }
-
+    /**Method
+     * checks if the name user entered is valid
+     * pre:the user must have entered a name 
+     * post:the username has been checked over
+     * @param event 
+     */
     @FXML
     public void EnteredCharacterName(ActionEvent event) {
         if (!characterNameTextField.getText().matches("[a-zA-Z]+")) {
             characterLabel.setText("Your Character Name Can't Be Nothing,\n  contain numbers and spaces ");
-            conditions[4] = true;
+            
 
         } else {
+            conditions[4] = true;
             characterName = characterNameTextField.getText();
             characterLabel.setText("Your Character Name is: " + characterName);
 
         }
 
-        /* if (characterNameTextField.getText().equalsIgnoreCase("")) {
-            characterLabel.setText("Your Character Name Can't Be Nothing");
-        } else {
-            characterName = characterNameTextField.getText();
-            characterLabel.setText("Your Character Name is: " + characterName);
-        } */
+        
     }
-
+    /**Method
+     * displays warrior description
+     * pre:the cursor must have moved over to the warrior checkBox
+     * post: the warrior description has been displayed
+     * @param eve 
+     */
     @FXML
     public void warriorDescription(Event eve) {
         description.setText(allDescriptions.get(0));
     }
-
+    /**Method
+     * displays archer description
+     * pre:the cursor must have moved over to the archer checkBox
+     * post: the archer description has been displayed
+     * @param event1 
+     */
     @FXML
     public void archerDescription(Event event1) {
         description.setText(allDescriptions.get(1));
     }
-
+    /**Method
+     * displays knight description
+     * pre:the cursor must have moved over to the knight  checkBox
+     * post: the knight description has been displayed
+     * @param event
+     */
     @FXML
     public void knightDescription(Event event) {
         description.setText(allDescriptions.get(2));
     }
-
+    /**Method
+     * displays human description
+     * pre:the cursor must have moved over to the human checkBox
+     * post: the human description has been displayed
+     * @param eve 
+     */
     @FXML
     public void humanDescription(Event event) {
         description.setText(allDescriptions.get(3));
     }
-
+    /**Method
+     * displays pounder description
+     * pre:the cursor must have moved over to the pounder checkBox
+     * post: the pounder description has been displayed
+     * @param eve 
+     */
     @FXML
     public void pounderDescription(Event event) {
         description.setText(allDescriptions.get(4));
     }
-
+    /**Method
+     * checks if user has picked any of the race checkBoxes
+     * pre:the user must have picked a race checkBox
+     * post: sets the character race according to what the user has picked
+     * @param event 
+     */
     @FXML
     public void checkEventChoseRace(Event event) {
         conditions[0] = true;
@@ -171,7 +213,12 @@ public class GameScreenController implements Initializable {
             humanBox.setSelected(false);
         }
     }
-
+    /**Method
+     * checks if user has picked any of the gender checkBoxes
+     * pre:the user must have picked a gender checkBox
+     * post: sets the character gender according to what the user has picked
+     * @param event 
+     */
     @FXML
     public void checkEventChooseGender(Event event) {
         conditions[1] = true;
@@ -183,7 +230,12 @@ public class GameScreenController implements Initializable {
             maleBox.setSelected(false);
         }
     }
-
+    /**Method
+     * checks if user has picked any of the bodyType checkBoxes
+     * pre:the user must have picked a bodyType checkBox
+     * post: sets the character bodyType according to what the user has picked
+     * @param event 
+     */
     @FXML
     public void checkEventChooseBodyType(Event event) {
         conditions[2] = true;
@@ -201,7 +253,13 @@ public class GameScreenController implements Initializable {
             muscularBox.setSelected(false);
         }
     }
-
+    
+    /**Method
+     * checks if user has picked any of the class checkBoxes
+     * pre:the user must have picked a class checkBox
+     * post: sets the character class according to what the user has picked
+     * @param event 
+     */
     @FXML
     public void checkEventChooseClass(Event event) {
         conditions[3] = true;
@@ -219,7 +277,13 @@ public class GameScreenController implements Initializable {
             warriorBox.setSelected(false);
         }
     }
-
+    /**Method
+     * Checks if the user has finished all the categories  required, and opens up a new scene accordingly
+     * pre:the user must have clicked the done button
+     * post:changes the scene if the user has clicked and done all the categories required
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void doneButton(Event event) throws Exception {
         int adder = 0;

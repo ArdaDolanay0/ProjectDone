@@ -5,11 +5,12 @@
  */
 package File;
 
-/**
- *
- * @author USER
+/**Interface
+ * creates an interface
+ * pre: none
+ * post: an interface has been created 
  */
 public interface OutputInterface {
     public void createOutputStream()throws Exception;
-   // public void writeLine(String data)throws Exception;
+ 
 }

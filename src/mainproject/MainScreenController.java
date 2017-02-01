@@ -47,7 +47,10 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button closeButton;
 
-    /**
+    /**Method
+     *Initializes and sets mediaplayer and media
+     * pre:none
+     * post:The MediaPlayer has been initialized and played 
      * Initializes the controller class.
      */
     @Override
@@ -58,26 +61,29 @@ public class MainScreenController implements Initializable {
         mp = new MediaPlayer(me);
         mv.setMediaPlayer(mp);
         mp.play();
-       changeBackgroundColour(mainBackground);
-       changeBackgroundColour(secondImage);
+        changeBackgroundColour(mainBackground);
+        changeBackgroundColour(secondImage);
     }
-
+    /**Method
+     * changes the scene and stops the music whenever the user clicks the start method 
+     * pre:the user must have clicked the start method 
+     * post:The scene has been changed and song stoped
+     * @param event
+     * @throws Exception 
+     */
     public void startButton(ActionEvent event) throws Exception {
-        //Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Stage stage = (Stage) closeButton.getScene().getWindow();
-        //Stage primaryStage = new Stage();
-        // stage.close();
+        //closes the media player
         mp.dispose();
-
-        String FxName = "gameScreen.fxml";
+        String fxFrame = "gameScreen.fxml";
         MakingGame newGame = new MakingGame();
-        newGame.start(stage, FxName);
+        newGame.start(stage, fxFrame);
     }
 
     public void changeBackgroundColour(ImageView view) {
         ColorAdjust blackout = new ColorAdjust();
         blackout.setBrightness(-0.5);
-        
+
         view.setEffect(blackout);
         view.setCache(true);
         view.setCacheHint(CacheHint.SPEED);

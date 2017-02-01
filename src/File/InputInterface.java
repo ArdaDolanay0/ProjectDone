@@ -8,9 +8,10 @@ package File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-/**
- *
- * @author USER
+/**Class
+ * this is the input interface for the file 
+ * pre: inputInterface must be implemented 
+ * post: initializes input methods
  */
 public interface InputInterface {
     

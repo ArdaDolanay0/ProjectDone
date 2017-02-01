@@ -23,7 +23,13 @@ import javafx.stage.Stage;
  * @author USER
  */
 public class MainProject extends Application {
-   //@FXML private javafx.scene.control.Button closeButton;
+    /**Method
+     * sets a stage in the FX document, which gets a scene, which gets a parent, 
+     * pre:none
+     * post:An FX document has been created
+     * @param primaryStage
+     * @throws IOException 
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
      
@@ -44,7 +50,10 @@ public class MainProject extends Application {
     
 
 
-    /**
+    /**Method
+     * creates an FX document
+     * pre:none
+     * post calles the launch method
      * @param args the command line arguments
      */
     public static void main(String[] args) {

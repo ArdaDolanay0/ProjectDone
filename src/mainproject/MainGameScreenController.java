@@ -5,7 +5,7 @@
  */
 package mainproject;
 
-import changeLineInFile.ChangeLineInFile;
+import changeLineInFile.ChangeLine;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,9 +31,12 @@ public class MainGameScreenController implements Initializable {
 
     @FXML
     private Button confirmButton;
-    private ChangeLineInFile newChanges;
+    private ChangeLine newChanges;
 
-    /**
+    /**Method
+     * creates dialogue options
+     * pre:none
+     * post:calles the createDialogueOptions method
      * Initializes the controller class.
      */
     @Override
@@ -44,12 +47,22 @@ public class MainGameScreenController implements Initializable {
 
         }
     }
-
+    /**Method
+     * sets a local instance object and calles  modifyNarratorDialogue1
+     * pre:none
+     * post: newChanges has been in initialize and called modifyNarratorDialogue1 
+     * @throws IOException 
+     */
     public void createDialogueOptions() throws IOException {
-        newChanges = new ChangeLineInFile();
+        newChanges = new ChangeLine();
         modifyNarratorDialogue1();
     }
-
+    /**Method
+     *Changes certain lines in the naratorDialuge1 file
+     * pre:none
+     * post:Lines have been changed in the naratorDialuge1 file
+     * @throws IOException 
+     */
     public void modifyNarratorDialogue1() throws IOException {
         String file = "src/files/naratorDialuge1.txt";
         String word1 = GameScreenController.characterClass;
@@ -59,7 +72,13 @@ public class MainGameScreenController implements Initializable {
         newChanges.changeALineInATextFile(file, word2, 6);
         newChanges.changeALineInATextFile(file, word3, 8);
     }
-
+    /**Method
+     * Changes the currant scene to another one
+     *pre:confirm button must have been clicked
+     * post:The scene has been changed
+     * @param event
+     * @throws Exception 
+     */
     public void confirmButtonAction(ActionEvent event) throws Exception {
         String FxName = "storyScreen.fxml";
         Stage stage = (Stage) confirmButton.getScene().getWindow();
